@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   LLM NOOK & CORNER - DESIGN SYSTEM
+   Theme: Deep Engineering / Sci-Fi HUD
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Base colors - Black/Grey monochrome theme */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 90%;
+
+    /* Card - Dark panels */
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 90%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 90%;
+
+    /* Primary - Neutral white accent */
+    --primary: 0 0% 85%;
+    --primary-foreground: 0 0% 5%;
+
+    /* Secondary - Medium grey */
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 90%;
+
+    /* Muted */
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 50%;
+
+    /* Accent - Light grey */
+    --accent: 0 0% 25%;
+    --accent-foreground: 0 0% 95%;
+
+    /* Destructive */
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Warning */
+    --warning: 40 70% 50%;
+    --warning-foreground: 0 0% 5%;
+
+    /* Borders and inputs */
+    --border: 0 0% 15%;
+    --input: 0 0% 10%;
+    --ring: 0 0% 70%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 80%;
+    --sidebar-primary: 0 0% 90%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 0 0% 70%;
+
+    /* Neon colors - now subtle greys */
+    --neon-cyan: 0 0% 70%;
+    --neon-violet: 0 0% 60%;
+    --neon-emerald: 0 0% 65%;
+    --neon-amber: 0 0% 55%;
+    --neon-rose: 0 0% 50%;
+
+    /* Glassmorphism */
+    --glass-bg: 0 0% 6% / 0.7;
+    --glass-border: 0 0% 100% / 0.08;
+    --glass-shadow: 0 0% 0% / 0.5;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 80%), hsl(0 0% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 40%), hsl(0 0% 20%));
+    --gradient-success: linear-gradient(135deg, hsl(0 0% 60%), hsl(0 0% 80%));
+    --gradient-radial: radial-gradient(ellipse at center, hsl(0 0% 10%) 0%, hsl(0 0% 4%) 70%);
+  }
+
+  /* Force dark mode */
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Code/Token typography */
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Glassmorphic card */
+  .glass-panel {
+    @apply relative overflow-hidden rounded-xl;
+    background: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(24px);
+    box-shadow: 
+      0 4px 30px hsl(var(--glass-shadow)),
+      inset 0 1px 0 hsl(0 0% 100% / 0.05);
+    transition: all 0.3s ease-out;
+  }
+
+  .glass-panel:hover {
+    border-color: hsl(187 92% 55% / 0.2);
+    box-shadow: 
+      0 4px 30px hsl(var(--glass-shadow)),
+      inset 0 1px 0 hsl(0 0% 100% / 0.05),
+      0 0 30px hsl(187 92% 55% / 0.1);
+  }
+
+  .glass-panel-subtle {
+    @apply relative overflow-hidden rounded-lg;
+    background: hsl(222 40% 6% / 0.4);
+    border: 1px solid hsl(0 0% 100% / 0.05);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease-out;
+  }
+
+  .glass-panel-subtle:hover {
+    border-color: hsl(0 0% 100% / 0.1);
+    background: hsl(222 40% 8% / 0.5);
+  }
+
+  /* Consistent button base styles */
+  .btn-base {
+    @apply transition-all duration-300 ease-out;
+    @apply hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Glow effects - subtle grey/white */
+  .glow-cyan {
+    box-shadow: 0 0 20px hsl(0 0% 70% / 0.3), 0 0 40px hsl(0 0% 70% / 0.15);
+  }
+
+  .glow-violet {
+    box-shadow: 0 0 20px hsl(0 0% 60% / 0.3), 0 0 40px hsl(0 0% 60% / 0.15);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 20px hsl(0 0% 65% / 0.3), 0 0 40px hsl(0 0% 65% / 0.15);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 20px hsl(0 0% 55% / 0.3), 0 0 40px hsl(0 0% 55% / 0.15);
+  }
+
+  .glow-rose {
+    box-shadow: 0 0 20px hsl(0 0% 50% / 0.3), 0 0 40px hsl(0 0% 50% / 0.15);
+  }
+
+  /* Text glow - subtle */
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(0 0% 80% / 0.4), 0 0 20px hsl(0 0% 80% / 0.2);
+  }
+
+  .text-glow-violet {
+    text-shadow: 0 0 10px hsl(0 0% 60% / 0.4), 0 0 20px hsl(0 0% 60% / 0.2);
+  }
+
+  /* Neon border animation - now subtle grey */
+  .neon-border {
+    @apply relative;
+  }
+
+  .neon-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl pointer-events-none;
+    background: linear-gradient(90deg, 
+      hsl(0 0% 50% / 0.3), 
+      hsl(0 0% 70% / 0.3), 
+      hsl(0 0% 50% / 0.3)
+    );
+    background-size: 200% 100%;
+    animation: neon-sweep 3s linear infinite;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: 1px;
+  }
+
+  /* Sidebar pill active state */
+  .nav-pill {
+    @apply relative px-3 py-2 rounded-lg transition-all duration-300;
+  }
+
+  .nav-pill.active {
+    @apply bg-primary/10;
+  }
+
+  .nav-pill.active::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-full bg-primary;
+    box-shadow: 0 0 12px hsl(187 92% 55% / 0.8);
+  }
+
+  /* Sci-Fi grid background - subtle */
+  .grid-bg {
+    background-image: 
+      linear-gradient(hsl(0 0% 50% / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 50% / 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Token chip styles */
+  .token-chip {
+    @apply inline-flex items-center px-2 py-1 rounded-md font-mono text-sm;
+    @apply border border-white/10 bg-white/5;
+    @apply transition-all duration-200 cursor-default;
+  }
+
+  .token-chip:hover {
+    @apply bg-white/10 scale-105;
+  }
+
+  /* Scrollbar styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(222 30% 10%);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(222 20% 25%);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(187 92% 55% / 0.5);
+  }
+
+  /* HUD corner decorations */
+  .hud-corner {
+    @apply absolute w-4 h-4;
+  }
+
+  .hud-corner::before,
+  .hud-corner::after {
+    content: '';
+    @apply absolute bg-primary/50;
+  }
+
+  .hud-corner.top-left::before {
+    @apply top-0 left-0 w-full h-px;
+  }
+  .hud-corner.top-left::after {
+    @apply top-0 left-0 w-px h-full;
+  }
+
+  .hud-corner.top-right::before {
+    @apply top-0 right-0 w-full h-px;
+  }
+  .hud-corner.top-right::after {
+    @apply top-0 right-0 w-px h-full;
+  }
+
+  .hud-corner.bottom-left::before {
+    @apply bottom-0 left-0 w-full h-px;
+  }
+  .hud-corner.bottom-left::after {
+    @apply bottom-0 left-0 w-px h-full;
+  }
+
+  .hud-corner.bottom-right::before {
+    @apply bottom-0 right-0 w-full h-px;
+  }
+  .hud-corner.bottom-right::after {
+    @apply bottom-0 right-0 w-px h-full;
+  }
+}
+
+@layer utilities {
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  /* Animation delays */
+  .delay-75 { animation-delay: 75ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-225 { animation-delay: 225ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-375 { animation-delay: 375ms; }
+  .delay-450 { animation-delay: 450ms; }
+}
+
+@keyframes neon-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Matrix rain effect for red teaming */
+@keyframes matrix-rain {
+  0% { transform: translateY(-100%); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
