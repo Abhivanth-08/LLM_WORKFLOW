@@ -34,27 +34,6 @@ Understanding transformers requires seeing their internals. This tool lets you:
 
 ---
 
-## Quick Start
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-cd frontend && npm install
-
-# Set up environment (optional: for AI-powered security)
-echo "OPENROUTER_API_KEY=your_key_here" > .env
-
-# Run backend
-cd api
-python main.py  # API at http://localhost:8000
-
-# Run frontend (new terminal)
-cd frontend
-npm run dev  # UI at http://localhost:5173
-```
-
----
-
 ## Features
 
 ### 🎯 Attention Head Profiler (NEW)
@@ -102,51 +81,6 @@ Each module includes:
 
 ---
 
-## Project Structure
-
-```
-llm_workflow/
-├── llm_logic.py              # Core LLM mechanics
-├── attention_profiler.py     # Head clustering & analysis
-├── requirements.txt          # Python dependencies
-│
-├── api/                      # FastAPI backend
-│   ├── main.py              # API entry point
-│   └── routers/             # Endpoints
-│       ├── attention.py     # Attention + head profiler
-│       ├── embeddings.py    # Semantic space
-│       ├── tokenizer.py     # BPE tokenization
-│       ├── security.py      # AI security analysis
-│       ├── cost.py          # Cost comparison
-│       └── context.py       # Context window
-│
-└── frontend/                 # React app
-    └── src/components/modules/
-        ├── AttentionModule.tsx
-        ├── EmbeddingsModule.tsx
-        ├── TokenizerModule.tsx
-        └── ...
-```
-
----
-
-## API Documentation
-
-Once running, visit **http://localhost:8000/docs** for interactive API docs.
-
-### Key Endpoints
-
-```http
-POST /api/attention/analyze
-GET  /api/attention/head-profiles        # 3D head clustering
-GET  /api/attention/head-examples/{layer}/{head}
-POST /api/embeddings/generate
-POST /api/security/analyze
-POST /api/cost/analyze
-```
-
----
-
 ## What Makes This Different
 
 ❌ **Not a demo**: Real GPT-2 inference, not simulated attention  
@@ -175,12 +109,6 @@ Focus areas:
 - Node.js 18+
 - 4GB RAM (for GPT-2 inference)
 - Optional: OpenRouter API key (for AI security analysis)
-
----
-
-## License
-
-MIT
 
 ---
 
