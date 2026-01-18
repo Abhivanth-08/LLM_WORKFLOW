@@ -122,6 +122,3 @@ Focus areas:
 
 ---
 
-**Built to teach, not to impress.**
-
-[Report Bug](https://github.com/yourusername/llm_workflow/issues) · [Request Feature](https://github.com/yourusername/llm_workflow/issues)
