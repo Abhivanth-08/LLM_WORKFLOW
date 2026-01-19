@@ -4,7 +4,7 @@
  */
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://abhi02072005-llmworkflow.hf.space';
+const API_BASE_URL = 'https://abhi02072005-llmworkflow.hf.space';
 
 // Create axios instance
 const apiClient = axios.create({
