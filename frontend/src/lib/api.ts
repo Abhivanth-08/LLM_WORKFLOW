@@ -115,6 +115,21 @@ export const embeddingsApi = {
 export const attentionApi = {
     analyze: (data: { text: string; layer?: number; head?: number }) =>
         apiClient.post('/api/attention/analyze', data),
+    
+    getHeadProfiles: () => 
+        apiClient.get('/api/attention/head-profiles'),
+
+    getHeadExamples: (layer: number, head: number) => 
+        apiClient.get(`/api/attention/head-examples/${layer}/${head}`),
+
+    getClusterInfo: (clusterId: number) => 
+        apiClient.get(`/api/attention/cluster-info/${clusterId}`),
+
+    getMetadata: () => 
+        apiClient.get('/api/attention/metadata'),
+
+    getHeadExplanation: (layer: number, head: number) => 
+        apiClient.get(`/api/attention/head-explanation/${layer}/${head}`),
 };
 
 // ============================================================

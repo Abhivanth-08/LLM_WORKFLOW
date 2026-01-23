@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Loader2, Info } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { cn } from '@/lib/utils';
+import { attentionApi } from '@/lib/api';
 
 // Simple 3D scatter plot using HTML/CSS (lightweight alternative to Three.js)
 interface HeadPoint {
@@ -39,24 +40,16 @@ export function AttentionHeadProfilerModule() {
     // Fetch head profiles
     const { data: profilesData, isLoading, error } = useQuery({
         queryKey: ['head-profiles'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:8000/api/attention/head-profiles');
-            if (!res.ok) throw new Error('Failed to fetch profiles');
-            return res.json();
-        },
+        queryFn: () => attentionApi.getHeadProfiles(),
         staleTime: Infinity, // Cache forever since profiles don't change
     });
 
     // Fetch examples for selected head
     const { data: examplesData } = useQuery({
         queryKey: ['head-examples', selectedHead?.layer, selectedHead?.head],
-        queryFn: async () => {
+        queryFn: () => {
             if (!selectedHead) return null;
-            const res = await fetch(
-                `http://localhost:8000/api/attention/head-examples/${selectedHead.layer}/${selectedHead.head}`
-            );
-            if (!res.ok) throw new Error('Failed to fetch examples');
-            return res.json();
+            return attentionApi.getHeadExamples(selectedHead.layer, selectedHead.head);
         },
         enabled: !!selectedHead,
     });
@@ -64,13 +57,9 @@ export function AttentionHeadProfilerModule() {
     // Fetch cluster info
     const { data: clusterData } = useQuery({
         queryKey: ['cluster-info', selectedCluster],
-        queryFn: async () => {
+        queryFn: () => {
             if (selectedCluster === null) return null;
-            const res = await fetch(
-                `http://localhost:8000/api/attention/cluster-info/${selectedCluster}`
-            );
-            if (!res.ok) throw new Error('Failed to fetch cluster info');
-            return res.json();
+            return attentionApi.getClusterInfo(selectedCluster);
         },
         enabled: selectedCluster !== null,
     });
@@ -78,24 +67,16 @@ export function AttentionHeadProfilerModule() {
     // Fetch metadata
     const { data: metadata } = useQuery({
         queryKey: ['profiler-metadata'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:8000/api/attention/metadata');
-            if (!res.ok) throw new Error('Failed to fetch metadata');
-            return res.json();
-        },
+        queryFn: () => attentionApi.getMetadata(),
         staleTime: Infinity,
     });
 
     // Fetch head explanation
     const { data: explanation } = useQuery({
         queryKey: ['head-explanation', selectedHead?.layer, selectedHead?.head],
-        queryFn: async () => {
+        queryFn: () => {
             if (!selectedHead) return null;
-            const res = await fetch(
-                `http://localhost:8000/api/attention/head-explanation/${selectedHead.layer}/${selectedHead.head}`
-            );
-            if (!res.ok) throw new Error('Failed to fetch explanation');
-            return res.json();
+            return attentionApi.getHeadExplanation(selectedHead.layer, selectedHead.head);
         },
         enabled: !!selectedHead,
     });
